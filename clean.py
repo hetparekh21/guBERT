@@ -117,6 +117,9 @@ def main():
         punctuation_only_rows = rows_after_cleaning - cleaned_rows
         cleaned_chars = df["clean_sentence"].apply(len).sum()
         chars_removed = original_chars - cleaned_chars
+
+        # remove commas from the cleaned sentences
+        df["clean_sentence"] = df["clean_sentence"].str.replace(',', '', regex=False)
         
         # Save cleaned dataset
         print(f"💾 Saving cleaned dataset to: {output_path}")
